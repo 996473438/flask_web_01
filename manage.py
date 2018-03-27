@@ -1,12 +1,14 @@
 from app import create_app, db
 from flask_script import Server, Manager, Shell
+from app.models.user import User
+from app.models.role import Role
 
 app = create_app('default')
 manager = Manager(app=app)
 
 
 def make_shell_context():
-    return dict(app=app, db=db)
+    return dict(app=app, db=db, Role=Role, User=User)
 
 
 manager.add_command('runserver', Server(host='192.168.1.30', port=80, use_debugger=True, use_reloader=True))
